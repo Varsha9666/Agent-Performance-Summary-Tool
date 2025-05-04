@@ -1,4 +1,4 @@
-# 📊 Agent Performance Summary Tool – README
+# 📊 Agent Performance Summary Tool 
 
 This project was completed as part of an internship assessment. The goal is to analyze call center data and generate an agent-wise performance report for a specific day.
 
@@ -32,7 +32,11 @@ Identify the top-performing agent for a selected date.
 
 Save the summary as a CSV file and visualize insights with plots.
 
+--- 
+
+
 ### Tasks:
+
 1. Data Ingestion and Validation:
  - Read all 3 files into pandas.
  - Ensure call_date, agent_id, and org_id are present and correctly formatted.
@@ -56,8 +60,10 @@ Save the summary as a CSV file and visualize insights with plots.
    
 4. Output:
  - Save the report as agent_performance_summary.csv
- - Format a Slack-style summary message lik
+ - Format a Slack-style summary
+   
 ---
+
 
 #### 📁 Input Files Description
 
@@ -69,7 +75,7 @@ Save the summary as a CSV file and visualize insights with plots.
 
 ---
 
-📁 Data Sources and Schemas:
+##### 📁 Data Sources and Schemas:
 
 The pipeline uses three input files (as per the assignment):
 
@@ -80,12 +86,12 @@ The pipeline uses three input files (as per the assignment):
 - disposition_summary.csv: Daily login (presence) data. Columns: agent_id, org_id, call_date, login_time. Indicates if/when an agent logged in on that date
 These files are loaded into pandas DataFrames. The pipeline ensures that the join keys (agent_id, org_id, call_date) are present and correctly formatted
 
+---
 
-##### **Pipeline Overview**
+###### Pipeline Overview
 
 The end-to-end processing pipeline proceeds as follows:
 Data Ingestion & Validation: Load all three CSVs into pandas. Check for missing or malformed values in critical fields (agent_id, org_id, call_date) and flag duplicates. For instance, duplicate call_id entries are dropped, and any missing agent_id or call_date rows are reported (matching the assignment’s data validation requirements)
-
 
 - Preprocessing: Standardize data types (e.g. convert call_date to datetime), trim whitespace, and normalize any inconsistent formatting. Ensure org_id fields align across files (they represent the organization code).
   
@@ -114,7 +120,9 @@ This indicates Agent A001 (Org O1) made 20 calls on 2025-04-28, with 2 completio
 👥 Total Active Agents: 20
 ⏱️ Average Duration: 0.12 min
 
-##### 🔧 **CLI Script Functions**
+---
+
+###### 🔧 **CLI Script Functions**
 
 The core logic is encapsulated in modular functions within agent_summary_script.py:
 parse_args() – Uses argparse to read command-line arguments for input file paths and the target date (e.g. --date 2025-04-28). Ensures required arguments are provided.
@@ -141,6 +149,8 @@ This modular structure ensures clean code and reusability, addressing the code c
 
 Visualization (Notebook only): The companion Jupyter notebook explores the data with charts (see Visualizations below). These are analytical, not required for the CLI output, but they help illustrate patterns (e.g. bar charts of calls per agent or connect-rate distributions).
 
+---
+
 ###### **Visualizations**
 
 (All charts are generated in the accompanying Jupyter Notebook for exploratory analysis.) The notebook produces several key plots to illustrate agent performance trends:
@@ -153,6 +163,8 @@ Average Call Duration (Histogram or Boxplot): A distribution plot of call durati
 Presence Summary (Pie/Bar): A simple chart of active vs. inactive agents (presence flag). Since Presence is 1 if an agent logged in, this chart shows what fraction of roster agents were active that day. It’s useful for compliance/attendance analysis.
 
 Each visualization is accompanied by commentary in the notebook, explaining what the chart shows and any notable insights (e.g., “Agent X not only made the most calls but also had one of the highest connect rates, indicating strong performance”). These charts help stakeholders quickly see key performance patterns beyond the raw numbers.
+
+---
 
 ## 🪛 Code Walkthrough (Jupyter Notebook)
 
